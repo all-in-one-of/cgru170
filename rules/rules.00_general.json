@@ -1,0 +1,152 @@
+{
+"root":"rules_root",
+"rufolder":".rules",
+"company":"CGRU",
+"playlist":"rules/playlist.json",
+"newsrefresh":60,
+
+"tags":{
+	"done"    :{"title":"DONE",     "short":"D",   "tip":"Done"},
+	"error"   :{"title":"ERROR",    "short":"Err", "tip":"Error"},
+	"hold"    :{"title":"HOLD",     "short":"Hl",  "tip":"On hold"},
+	"omit"    :{"title":"OMIT",     "short":"Om",  "tip":"Omit"},
+	"started" :{"title":"Started",  "short":"St",  "tip":"Started"},
+	"wirem"   :{"title":"WiRem",    "short":"WR",  "tip":"Wire remove"},
+	"back"    :{"title":"Back",     "short":"Bk",  "tip":"Back placement"},
+	"cleanup" :{"title":"CleanUp",  "short":"Cl",  "tip":"Cleanup"},
+	"animatic":{"title":"Animatic", "short":"An",  "tip":"Animiatic"},
+	"fullcg"  :{"title":"FullCG",   "short":"FCG", "tip":"Full CG Shot"},
+	"other"   :{"title":"Other",    "short":"Ot",  "tip":"Something else"},
+	"titles"  :{"title":"Titles",   "short":"Tt",  "tip":"Titles"}
+},
+
+"comments":{
+	"message":{"title":"Message","color":[150,200,100]},
+	"report" :{"title":"Report" ,"color":[200,200,100]},
+	"review" :{"title":"Review" ,"color":[150,10,10]},
+	"client" :{"title":"Client" ,"color":[20,100,20]},
+	"generic":{"title":"generic"}
+},
+
+"assets":{
+	"project":{
+		"seek":["/"],
+		"upload_dir":"_UPLOADS/@DATE@_@USER@",
+		"play_folders":false,
+		"show_files":true
+	},
+	"scenes":{
+		"seek":["[project]/SCENES","[project]/SHOTS"],
+		"upload_dir":"_UPLOADS/@DATE@_@USER@",
+		"name":"",
+		"filter":"sc_FilterShots",
+		"scripts":["scenes.js"]
+	},
+	"scene":{
+		"seek":["[scenes]/"],
+		"upload_dir":"_UPLOADS/@DATE@_@USER@",
+		"filter":"sc_FilterShots",
+		"scripts":["scenes.js"]
+	},
+	"shot":{
+		"seek":["[scene]/"],
+		"upload_dir":"_UPLOADS/@DATE@_@USER@",
+		"scripts":["shot.js"],
+		"source":{
+			"path":["SOURCE/SCAN"]
+		},
+		"result":{
+			"path":["RESULT/DPX","RESULT/JPG"]
+		},
+		"dailies":{
+			"path":["RESULT/DAILIES"]
+		}
+	}
+},
+
+"cmdexec":{"open_folder":"open \"@PATH@\""},
+
+"OS_linux":{
+	"cmdexec":{
+		"open_folder":"nautilus \"@PATH@\"",
+		"play_sequence":[
+			{"name":"DJV",
+				"cmd":"djv_view \"@PATH@\""}
+		],
+		"play_movie":[
+			{"name":"VLC",
+				"cmd":"vlc \"@PATH@\""},
+			{"name":"Totem",
+				"cmd":"totem \"@PATH@\""}
+		]
+	}
+},
+
+"OS_macosx":{
+	"cmdexec":{
+		"open_folder":"open \"@PATH@\"",
+		"play_movie":[
+			{"name":"QT",
+				"cmd":"open \"@PATH@\""}
+		]
+	}
+},
+
+"OS_windows":{
+	"cmdexec":{
+		"open_folder":"start @PATH@",
+		"play_sequence":[
+			{"name":"PdP",
+				"cmd":"pdplayer --fps=@FPS@ @PATH@"},
+			{"name":"Pd++",
+				"cmd":"pdplayer --fps=@FPS@ --attach @PATH@"}
+		],
+		"play_movie":[
+			{"name":"QT",
+				"cmd":"QuickTimePlayer @PATH@"},
+			{"name":"VLC",
+				"cmd":"vlc @PATH@"}
+		]
+	}
+},
+
+"thumbnail":{
+	"filename":"thumbnail.jpg",
+	"cmd_asset":"rules/bin/thumbnail.py -n 3 -i \"@INPUT@\" -t 600 -o \"@OUTPUT@\"",
+	"create_file":"rules/bin/thumbnail.py -i \"@INPUT@\" -t 600 -o \"@OUTPUT@\""
+},
+
+"avconv":"ffmpeg",
+"skipfiles":[".","Thumbs.db"],
+
+"fps":"24",
+"dailies":
+{
+	"resolution":"1280x720",
+	"fps":"25",
+	"codec":"photojpg_high",
+	"template":"dailies_withlogo",
+	"slate":"dailies_slate",
+	"naming":"(s)_(v)_(d)",
+	"logo_slate_path":"logo.png",
+	"logo_slate_size":25,
+	"logo_slate_grav":"SouthEast",
+	"logo_frame_path":"logo.png",
+	"logo_frame_size":10,
+	"logo_frame_grav":"North",
+	"activity":"comp",
+
+	"codecs":{
+		"photojpg_high":"PhotoJPG High",
+		"photojpg_mid":"PhotoJPG Mid",
+		"photojpg_low":"PhotoJPG Low",
+		"h264_crf15_high":"H264 High",
+		"h264_crf21_mid":"H264 Mid",
+		"h264_crf25_low":"H264 Low",
+		"h264_crf30_bad":"H264 Bad",
+		"h264_crf40_ugly":"H264 Ugly"
+	},
+
+	"af_capacity":500
+}
+}
