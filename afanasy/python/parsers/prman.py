@@ -1,5 +1,7 @@
 from parsers import parser
 
+IMAGE=""
+
 class prman(parser.parser):
    'PIXAR\'s RenderMan'
    def __init__( self, frames = 1):
